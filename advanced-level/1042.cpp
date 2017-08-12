@@ -46,3 +46,49 @@ int main()
 	
 	return 0;
 }
+
+
+//书本解法， 思路更加清晰
+#include <cstdio>
+const int N = 54;
+char mp[5] = {'S', 'H', 'C', 'D', 'J'};
+int start[N+1], end[N+1], next[N+1];
+
+int main()
+{
+	int k;
+	scanf("%d", &k);
+	//记得初始化 
+	for(int i = 1; i <= N; i++)
+	{
+		start[i] = i;
+	}
+	
+	for(int i = 1; i <= N; i++)
+	{
+		scanf("%d", &next[i]);
+	}
+	for(int step = 0; step < k; step++)
+	{
+		for(int i = 1; i <= N; i++)
+		{
+			end[next[i]] = start[i];
+		}
+		
+		for(int i = 1; i <= N; i++)
+		{
+			start[i] = end[i];
+		}
+	}
+	
+	for(int i = 1; i <= N; i++)
+	{
+		start[i]--;
+		printf("%c%d", mp[start[i]/13], start[i]%13+1);//这里的数字要 +1 
+		if(i < N)
+		{
+			printf(" ");
+		}
+	}
+	return 0;
+}
